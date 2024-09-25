@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Querido Kyle</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      .medievalsharp-regular {
+        font-family: "MedievalSharp", cursive;
+        font-weight: 400;
+        font-style: normal;
+      }
+
+      .heart {
+        position: relative;
+        width: 200px;
+        height: 200px;
+        background-color: red;
+        transform: rotate(-45deg);
+        border-radius: 4px;
+        backface-visibility: hidden;
+        -webkit-animation: pulsate-bck 3s ease-in-out infinite both;
+        animation: pulsate-bck 3s ease-in-out infinite both;
+      }
+      @-webkit-keyframes pulsate-bck {
+        0% {
+          -webkit-transform: scale(1);
+          transform: scale(1) rotate(-45deg);
+        }
+        50% {
+          -webkit-transform: scale(0.9);
+          transform: scale(0.9) rotate(-45deg);
+        }
+        100% {
+          -webkit-transform: scale(1);
+          transform: scale(1) rotate(-45deg);
+        }
+      }
+      @keyframes pulsate-bck {
+        0% {
+          -webkit-transform: scale(1);
+          transform: scale(1) rotate(-45deg);
+        }
+        50% {
+          -webkit-transform: scale(0.9);
+          transform: scale(0.9) rotate(-45deg);
+        }
+        100% {
+          -webkit-transform: scale(1);
+          transform: scale(1) rotate(-45deg);
+        }
+      }
+
+      body {
+        font-family: "Quicksand", sans-serif;
+        font-optical-sizing: auto;
+      }
+
+      .heart::before,
+      .heart::after {
+        content: "";
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        background-color: red;
+        border-radius: 50%;
+        backface-visibility: hidden;
+      }
+
+      .heart::before {
+        top: -100px;
+        left: 0;
+      }
+
+      .heart::after {
+        left: 100px;
+        top: 0;
+      }
+
+      .heart-back {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        background-color: pink;
+        transform: rotate(45deg) rotateY(180deg);
+        top: 0;
+        backface-visibility: hidden;
+      }
+
+      .heart-back::before,
+      .heart-back::after {
+        content: "";
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        background-color: pink;
+        border-radius: 50%;
+        backface-visibility: hidden;
+      }
+
+      .heart-back::before {
+        top: -100px;
+        left: 0;
+      }
+
+      .heart-back::after {
+        left: 100px;
+        top: 0;
+      }
+
+      /* Contenedor de la animación 3D */
+      .card {
+        perspective: 1000px;
+      }
+
+      /* Rotación 3D */
+      .rotate-card {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transform-style: preserve-3d;
+        transition: transform 1s ease;
+      }
+
+      .img-hidden {
+        opacity: 0;
+        transition: opacity 1s ease;
+      }
+      .img-display {
+        opacity: 100;
+        transition: opacity 1s ease;
+      }
+
+      /* Gira para mostrar la parte trasera */
+      .rotate-card.is-flipped {
+        transform: rotateY(180deg);
+      }
+      img {
+        max-width: none !important;
+        opacity: 100;
+        transition: opacity 1s ease;
+      }
+      .iframe-container {
+        position: fixed; /* Fija el iframe a la ventana */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1; /* Envía el iframe al fondo */
+      }
+      .opacity-hidden {
+        opacity: 0;
+      }
+    </style>
+  </head>
+
+  <body class="h-screen py-4 bg-black">
+    <iframe
+      class="iframe-container opacity-hidden"
+      src="./corazones.html"
+      frameborder="0"
+    ></iframe>
+    <h1 class="text-center text-white">
+      PARA LA NIÑA MAS BONITA DEL MUNDO <br />👁️🫦👁️
+    </h1>
+    <div class="flex text-white items-center justify-center">
+      <span class="text-center text-[8px]"
+        >Hecho por:
+        <a href="https://github.com/DiegoVanegas03">@DiegoVanegas03</a></span
+      >
+    </div>
+    <!-- Contenedor con perspectiva 3D -->
+    <div class="flex h-full items-center justify-center">
+      <div
+        class="card flex items-center justify-center relative cursor-pointer"
+      >
+        <div class="rotate-card" id="rotate-card">
+          <!-- Parte delantera del corazón -->
+          <div class="heart"></div>
+          <!-- Imagen sobre el corazón -->
+          <div
+            class="absolute img-display z-10 -top-2 left-1/2 transform -translate-x-1/2"
+            id="img-kyle"
+          >
+            <img src="./Kyle-broflovski.webp" width="150px" />
+          </div>
+          <!-- Parte trasera del corazón -->
+          <div class="heart-back">
+            <p
+              class="absolute italic pl-4 text-center rotate-45 z-10 medievalsharp-regular -left-[40px] w-[90vw]"
+              id="parrafo"
+            ></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
